@@ -34,4 +34,4 @@ npm start
 
 ## Status
 
-Projekt w rozwoju. Planowane: formularz kontaktowy, mapa dojazdu (Google Maps), własna domena, logo i zdjęcia od klienta.
+Projekt w rozwoju. Planowane: formularz kontaktowy, własna domena, logo i inne zdjecia.
