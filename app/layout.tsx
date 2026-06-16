@@ -1,33 +1,56 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-bricolage",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const inter = Inter({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-  title: "KOM-BIS — Usługi komunalne w Trójmieście",
-  description: "Pielęgnacja terenów zielonych, odśnieżanie, sprzątanie placów i parkingów. Działamy w Gdańsku od 2009 roku.",
+  metadataBase: new URL("https://kom-bis.com"),
+  title: {
+    default: "KOM-BIS — Odśnieżanie i utrzymanie terenów | Gdańsk",
+    template: "%s | KOM-BIS Gdańsk",
+  },
+  description:
+    "Odśnieżanie, piaskowanie i całoroczne utrzymanie terenów w Gdańsku i Trójmieście. Własna flota, gotowość o każdej porze. Place, parkingi, osiedla, biurowce.",
+  openGraph: {
+    type: "website",
+    locale: "pl_PL",
+    siteName: "KOM-BIS",
+    url: "https://kom-bis.com",
+    title: "KOM-BIS — Odśnieżanie i utrzymanie terenów | Gdańsk",
+    description:
+      "Odśnieżanie i całoroczne utrzymanie terenów w Gdańsku i Trójmieście. Własna flota, gotowość o każdej porze.",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="pl"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-season="zima" /*automatycznie daje na zime po wejsciu*/
+      className={`${bricolage.variable} ${inter.variable}`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body>
+        <JsonLd />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
